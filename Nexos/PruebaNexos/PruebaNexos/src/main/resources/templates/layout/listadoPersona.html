@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado Personas</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="listadoPersona">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-auto mx-auto">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>[[#{persona.lista-menu}]]</h4>
+                            </div>
+                            <div th:if="${persona != null and !persona.empty}">
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>#</th>
+                                            <th th:text="#{persona.nombres}">Nombres</th>
+                                            <th th:text="#{persona.apellidos}">Apellidos</th>
+                                            <th th:text="#{persona.tipoDocumento}">Tipo Documento</th>
+                                            <th th:text="#{persona.cedula}">Cedula</th>
+                                            <th th:text="#{persona.fechaNacimiento}">Fecha Nacimiento</th>
+                                            <th th:text="#{persona.direccion}">Direccion</th>
+                                            <th th:text="#{persona.celular}">Celular</th>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{accion.editar}">Editar</th>
+                                            <th sec:authorize="hasRole('ROLE_ADMIN')" th:text="#{accion.eliminar}">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="persona, contador : ${persona}">
+                                            <td>[[${contador.count}]]</td>
+                                            <td th:text="${persona.nombres}">Mostrar Nombres</td>
+                                            <td th:text="${persona.apellidos}">Mostrar Apellido</td>
+                                            <td th:text="${persona.tipoDocumento}">Mostrar tipo Documento</td>
+                                            <td th:text="${persona.cedula}">Mostrar Cedula</td>
+                                            <td th:text="${persona.fechaNacimiento}">Mostrar Fecha Nacimiento</td>
+                                            <td th:text="${persona.direccion}">Mostrar Direccion</td>
+                                            <td th:text="${persona.celular}">Mostrar Celular</td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/} + ${persona.idPersona}"
+                                                   class="btn btn-success btn-block">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.editar}]]
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/eliminar(idPersona=${persona.idPersona})}"
+                                                   class="btn btn-danger btn-block">
+                                                    <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>  
+                            <div class="text-center p-2" th:if="${persona == null or persona.empty}">
+                                <span th:text="#{persona.lista}">Lista vacía</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+

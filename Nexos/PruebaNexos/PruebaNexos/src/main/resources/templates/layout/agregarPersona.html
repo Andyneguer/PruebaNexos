@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Agregar Persona</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="agregarPersona">
+            <div id="agregarPersona" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" th:text="#{persona.crear}">Crear Persona</h5>
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div> 
+                        <form th:action="@{/guardar}" th:object="${persona}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nombres" th:text="#{persona.nombres}">Nombres</label>
+                                    <input type="text" class="form-control" name="nombres" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos" th:text="#{persona.apellidos}">Apellidos</label>
+                                    <input type="text" class="form-control" name="apellidos" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipoDocumento" th:text="#{persona.tipoDocumento}">TipoDocumento</label>
+                                    <input type="text" class="form-control" name="tipoDocumento" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cedula" th:text="#{persona.cedula}">Cedula</label>
+                                    <input type="text" class="form-control" name="cedula" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaNacimiento" th:text="#{persona.fechaNacimiento}">Fecha Nacimiento</label>
+                                    <input type="date" class="form-control" name="fechaNacimiento">
+                                </div>
+                                <div class="form-group">
+                                    <label for="direccion" th:text="#{persona.direccion}">Direccion</label>
+                                    <input type="text" class="form-control" name="direccion" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="celular" th:text="#{persona.celular}">Celular</label>
+                                    <input type="text" class="form-control" name="celular" required="true">
+                                </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                            </div>
+                                 </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
